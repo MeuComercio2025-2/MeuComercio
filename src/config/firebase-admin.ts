@@ -11,4 +11,6 @@ if(!admin.apps.length){
 
 
 const firestoreAdmin = admin.firestore();
-initialize(firestoreAdmin);
+initialize(firestoreAdmin,{
+    validateModels: true
+});
