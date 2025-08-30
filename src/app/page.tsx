@@ -8,7 +8,7 @@ export default function Home() {
   const [message, setMessage] = useState<string>("Carregando...");
 
   useEffect(() => {
-    axios.get("/api/clientes")
+    axios.get("/api/teste")
       .then(res => {
         setMessage(res.data.message ?? JSON.stringify(res.data));
       })
