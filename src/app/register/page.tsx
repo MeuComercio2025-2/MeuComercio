@@ -1,64 +1,98 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import InputField from "@/components/InputField";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function RegisterPage() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
+  const [confirmPassword, setConfirmPassword] = useState("")
 
   const handleRegister = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Usuário criado: ${name}, ${email}`);
-  };
+    e.preventDefault()
+
+    if (password !== confirmPassword) {
+      alert("As senhas não coincidem!")
+      return
+    }
+
+    alert(`Cadastro realizado!\nNome: ${name}\nE-mail: ${email}`)
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
-        <div className="flex flex-col items-center gap-2 mb-6">
-          <div className="text-4xl">🏪</div>
-          <h1 className="text-2xl font-bold text-gray-800">Criar Conta</h1>
-          <p className="text-gray-500 text-sm">Cadastre-se para começar</p>
-        </div>
+      <Card className="w-full max-w-md p-6 shadow-lg">
+        <CardHeader>
+          <div className="flex flex-col items-center gap-2">
+            <div className="text-4xl">🛒</div>
+            <CardTitle className="text-center">Crie sua conta</CardTitle>
+            <p className="text-gray-500 text-sm">Preencha os campos para se cadastrar</p>
+          </div>
+        </CardHeader>
 
-        <form onSubmit={handleRegister} className="space-y-4">
-          <InputField
-            label="Nome"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            placeholder="Seu nome completo"
-          />
-          <InputField
-            label="E-mail"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="exemplo@email.com"
-          />
-          <InputField
-            label="Senha"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="********"
-          />
+        <CardContent>
+          <form onSubmit={handleRegister} className="space-y-4">
+            <div>
+              <Label htmlFor="name">Nome</Label>
+              <Input
+                id="name"
+                type="text"
+                placeholder="Seu nome completo"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-orange-500 text-white py-2 rounded-lg hover:bg-orange-600 transition"
-          >
-            Cadastrar
-          </button>
-        </form>
+            <div>
+              <Label htmlFor="email">E-mail</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="exemplo@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-        <p className="text-sm text-gray-600 mt-4 text-center">
-          Já tem conta?{" "}
-          <a href="/login" className="text-orange-500 font-semibold hover:underline">
-            Fazer login
-          </a>
-        </p>
-      </div>
+            <div>
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <Label htmlFor="confirmPassword">Confirmar Senha</Label>
+              <Input
+                id="confirmPassword"
+                type="password"
+                placeholder="********"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+              />
+            </div>
+
+            <Button type="submit" className="w-full">
+              Cadastrar
+            </Button>
+          </form>
+
+          <p className="text-sm text-gray-600 mt-4 text-center">
+            Já tem conta?{" "}
+            <a href="/login" className="text-green-600 font-semibold hover:underline">
+              Entre aqui
+            </a>
+          </p>
+        </CardContent>
+      </Card>
     </div>
-  );
+  )
 }

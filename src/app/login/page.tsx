@@ -1,57 +1,68 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import InputField from "@/components/InputField";
+import { useState } from "react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("")
+  const [password, setPassword] = useState("")
 
   const handleLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    alert(`Login com: ${email}`);
-  };
+    e.preventDefault()
+    alert(`Login com: ${email}`)
+  }
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
-        <div className="flex flex-col items-center gap-2 mb-6">
-          <div className="text-4xl">🛒</div>
-          <h1 className="text-2xl font-bold text-gray-800">Meu Mercado</h1>
-          <p className="text-gray-500 text-sm">Entre para acessar o sistema</p>
-        </div>
+      <Card className="w-full max-w-md p-6 shadow-lg">
+        <CardHeader>
+          <div className="flex flex-col items-center gap-2">
+            <div className="text-4xl">🛒</div>
+            <CardTitle className="text-center">Meu Mercado</CardTitle>
+            <p className="text-gray-500 text-sm">Entre para acessar o sistema</p>
+          </div>
+        </CardHeader>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <InputField
-            label="E-mail"
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="exemplo@email.com"
-          />
-          <InputField
-            label="Senha"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            placeholder="********"
-          />
+        <CardContent>
+          <form onSubmit={handleLogin} className="space-y-4">
+            <div>
+              <Label htmlFor="email">E-mail</Label>
+              <Input
+                id="email"
+                type="email"
+                placeholder="exemplo@email.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
 
-          <button
-            type="submit"
-            className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition"
-          >
-            Entrar
-          </button>
-        </form>
+            <div>
+              <Label htmlFor="password">Senha</Label>
+              <Input
+                id="password"
+                type="password"
+                placeholder="********"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+              />
+            </div>
 
-        <p className="text-sm text-gray-600 mt-4 text-center">
-          Não tem conta?{" "}
-          <a href="/register" className="text-green-600 font-semibold hover:underline">
-            Cadastre-se
-          </a>
-        </p>
-      </div>
+            <Button type="submit" className="w-full">
+              Entrar
+            </Button>
+          </form>
+
+          <p className="text-sm text-gray-600 mt-4 text-center">
+            Não tem conta?{" "}
+            <a href="/register" className="text-green-600 font-semibold hover:underline">
+              Cadastre-se
+            </a>
+          </p>
+        </CardContent>
+      </Card>
     </div>
-  );
+  )
 }
